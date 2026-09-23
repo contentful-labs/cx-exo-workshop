@@ -5,9 +5,11 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const secret = searchParams.get("secret");
   const locale = searchParams.get("locale");
-  const id = searchParams.get("id");
+  const experienceId = searchParams.get("id");
+  const entityId = searchParams.get("entityId");
+  const entityType = searchParams.get("entityType");
 
-  if (secret !== process.env.DRAFT_MODE_SECRET || !locale || !id) {
+  if (secret !== process.env.DRAFT_MODE_SECRET || !locale) {
     return new Response("Invalid token", { status: 401 });
   }
 
@@ -30,5 +32,14 @@ export async function GET(request: Request) {
     });
   }
 
-  redirect(`/${locale}/${id}`);
+  if (experienceId) {
+    redirect(`/${locale}/${experienceId}`);
+  }
+
+  if (entityId && entityType) {
+    const query = new URLSearchParams({ entityType });
+    redirect(`/${locale}/${entityId}?${query.toString()}`);
+  }
+
+  return new Response("Invalid token", { status: 401 });
 }
