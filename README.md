@@ -37,6 +37,10 @@ Fill in `.env.local`:
   delivery token) and redirects to `/<locale>/<id>`.
 - `/api/draft/disable` — turns off Draft Mode and redirects back.
 
+**Workshop answer keys:** `step-03-end-state` (this branch — experience preview),
+`step-04-end-state` (fragment preview wired). `lib/fetch-fragment.ts` is included
+here for step 4; you wire it up in the live exercise or check out `step-04-end-state`.
+
 ## Design tokens: `globals.css` → `design-tokens.ts` → components
 
 Three pieces make up the whole design system:
