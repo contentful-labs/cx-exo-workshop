@@ -33,13 +33,15 @@ Fill in `.env.local`:
 - `/[locale]/[id]` — renders the Experience with id `id` in locale `locale`,
   e.g. `/en-US/homepage`. `notFound()` if the Experience doesn't exist.
 - `/api/draft/enable?secret=<DRAFT_MODE_SECRET>&locale=<locale>&id=<id>` —
-  turns on Draft Mode (fetches with the preview token instead of the
-  delivery token) and redirects to `/<locale>/<id>`.
+  turns on Draft Mode and redirects to `/<locale>/<id>` (experiences).
+- `/api/draft/enable?secret=<DRAFT_MODE_SECRET>&locale=<locale>&entityId=<id>&entityType=<type>` —
+  turns on Draft Mode and redirects to `/<locale>/<id>?entityType=<type>` (fragments).
+  Fragment rendering on the page is step 4.
 - `/api/draft/disable` — turns off Draft Mode and redirects back.
 
-**Workshop answer keys:** `step-03-end-state` (this branch — experience preview),
-`step-04-end-state` (fragment preview wired). `lib/fetch-fragment.ts` is included
-here for step 4; you wire it up in the live exercise or check out `step-04-end-state`.
+**Workshop answer keys:** `step-03-end-state` (this branch — experience on the page),
+`step-04-end-state` (fragment on the page). `lib/fetch-fragment.ts` and fragment
+`draft/enable` params match `main`; step 4 live coding is `page.tsx` + `preview-entity.ts`.
 
 ## Design tokens: `globals.css` → `design-tokens.ts` → components
 
