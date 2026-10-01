@@ -30,8 +30,8 @@ Fill in `.env.local`:
 
 ## Routes
 
-- `/[locale]/[id]` — renders the Experience with id `id` in locale `locale`,
-  e.g. `/en-US/homepage`. `notFound()` if the Experience doesn't exist.
+- `/[locale]/[id]` — fetches and renders an Experience, or a Fragment when
+  `?entityType=ExperienceFragment` is present (after fragment draft enable).
 - `/api/draft/enable?secret=<DRAFT_MODE_SECRET>&locale=<locale>&id=<id>` —
   turns on Draft Mode and redirects to `/<locale>/<id>` (experiences).
 - `/api/draft/enable?secret=<DRAFT_MODE_SECRET>&locale=<locale>&entityId=<id>&entityType=<type>` —
@@ -39,8 +39,8 @@ Fill in `.env.local`:
   Fragment rendering on the page is step 4.
 - `/api/draft/disable` — turns off Draft Mode and redirects back.
 
-**Workshop answer keys:** `step-03-end-state` (experience + fragment preview stub on the page),
-`step-04-end-state` (replace stub with `fetchFragment`). Helpers and `draft/enable` match `main`.
+**Workshop:** `step-03-end-state` = experience + fragment stub. This branch replaces the
+stub with `fetchFragment`. Helpers and `draft/enable` match `main`.
 
 ## Design tokens: `globals.css` → `design-tokens.ts` → components
 
@@ -128,8 +128,11 @@ Draft Mode is on.
 ## Cheatsheet
 Providing some code snippets for easy copy/paste while going through hand ons training. 
 
-**Preview URL**
+**Experience preview URL**
 `http://localhost:3000/api/draft/enable?secret=this-is-a-secret&locale={locale}&id={experience.sys.id}`
+
+**Fragment preview URL**
+`http://localhost:3000/api/draft/enable?secret=this-is-a-secret&locale={locale}&entityId={fragment.sys.id}&entityType={fragment.sys.type}`
 
 **Experience Fetching**
 ```
