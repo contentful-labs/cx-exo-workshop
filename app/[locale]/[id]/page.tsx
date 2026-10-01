@@ -2,14 +2,33 @@ import { notFound } from "next/navigation";
 import { draftMode } from "next/headers";
 import { fetchExperience, ServerExperienceRenderer } from "@contentful/experiences-react";
 import { experienceConfig } from "@/lib/experience-config";
+import { isFragmentEntityType } from "@/lib/preview-entity";
 
 export default async function Page({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string; id: string }>;
+  searchParams: Promise<{ entityType?: string }>;
 }) {
   const { locale, id } = await params;
+  const { entityType } = await searchParams;
   const { isEnabled: preview } = await draftMode();
+
+  if (isFragmentEntityType(entityType)) {
+    return (
+      <>
+        <div className="flex flex-wrap gap-4 p-2 text-sm bg-blue-300">
+          <p><b>Entity:</b> Fragment (preview)</p>
+          <p><b>Fragment ID:</b> {id}</p>
+          <p><b>Entity type:</b> {entityType}</p>
+          <p><b>Locale:</b> {locale}</p>
+          <p><b>Preview:</b> {preview ? "true" : "false"}</p>
+          <p><b>Step 4:</b> add fetchFragment + ServerExperienceRenderer here</p>
+        </div>
+      </>
+    );
+  }
 
   // The whole pipeline in one call: where to fetch from (space/environment/
   // experience/locale), how to authenticate (CDA token normally, CPA token
@@ -34,15 +53,18 @@ export default async function Page({
 
   if (!experience) notFound();
 
-  return <>
-  {/* Intentional, always-on learning aid — not scaffolding to remove. Lets
-      you see the resolved locale/id/preview values while working through
-      the exercises, regardless of draft mode. */}
-  <div className="flex gap-4 p-2 text-sm bg-blue-300">
-    <p><b>Experience ID:</b> {id}</p>
-    <p><b>Locale:</b> {locale}</p>
-    <p><b>Preview:</b> {preview ? "true" : "false"}</p>
-  </div>
-  <ServerExperienceRenderer experience={experience} config={experienceConfig} debug={preview} />
-  </>;
+  return (
+    <>
+      <div className="flex flex-wrap gap-4 p-2 text-sm bg-blue-300">
+        <p><b>Experience ID:</b> {id}</p>
+        <p><b>Locale:</b> {locale}</p>
+        <p><b>Preview:</b> {preview ? "true" : "false"}</p>
+      </div>
+      <ServerExperienceRenderer
+        experience={experience}
+        config={experienceConfig}
+        debug={preview}
+      />
+    </>
+  );
 }

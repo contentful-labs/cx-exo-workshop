@@ -39,9 +39,8 @@ Fill in `.env.local`:
   Fragment rendering on the page is step 4.
 - `/api/draft/disable` — turns off Draft Mode and redirects back.
 
-**Workshop answer keys:** `step-03-end-state` (this branch — experience on the page),
-`step-04-end-state` (fragment on the page). `lib/fetch-fragment.ts`, `lib/preview-entity.ts`,
-and fragment `draft/enable` match `main`; step 4 live coding is `page.tsx` + Contentful.
+**Workshop answer keys:** `step-03-end-state` (experience + fragment preview stub on the page),
+`step-04-end-state` (replace stub with `fetchFragment`). Helpers and `draft/enable` match `main`.
 
 ## Design tokens: `globals.css` → `design-tokens.ts` → components
 
