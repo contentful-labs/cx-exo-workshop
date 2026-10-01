@@ -41,8 +41,9 @@ Fill in `.env.local`:
 
 **Workshop answer keys:** `step-03-end-state` (experience preview on the page),
 `step-04-end-state` (fragment branch on the page). On `main`, `lib/fetch-fragment.ts`,
-`lib/preview-entity.ts`, and fragment `draft/enable` params are pre-wired; step 4
-live coding is `page.tsx` + Contentful Component preview platform.
+`lib/preview-entity.ts`, fragment `draft/enable`, and `entityType` on the page are
+pre-wired; step 4 live coding is the fragment `fetchFragment` block in `page.tsx`
++ Contentful Component preview platform.
 
 ## Design tokens: `globals.css` → `design-tokens.ts` → components
 
