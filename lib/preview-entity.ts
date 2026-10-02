@@ -1,6 +1,5 @@
 /**
- * Workshop utility for step 4: detect fragment preview from the `entityType`
- * query param after Contentful redirects from draft enable.
+ * Detect fragment entities for the XDA debug preview (`entityType` query param).
  */
 export function isFragmentEntityType(entityType: string | null | undefined): boolean {
   if (!entityType) return false;
