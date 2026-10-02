@@ -2,13 +2,10 @@ import { draftMode } from "next/headers";
 
 export default async function Page({
   params,
-  searchParams,
 }: {
   params: Promise<{ locale: string; id: string }>;
-  searchParams: Promise<{ entityType?: string }>;
 }) {
   const { locale, id } = await params;
-  const { entityType } = await searchParams;
   const { isEnabled: preview } = await draftMode();
 
   return (
@@ -18,7 +15,6 @@ export default async function Page({
       the exercises, regardless of draft mode. */}
       <div className="flex flex-wrap gap-4 p-2 text-sm bg-blue-300">
         <p><b>Experience ID:</b> {id}</p>
-        {entityType ? <p><b>Entity type:</b> {entityType}</p> : null}
         <p><b>Locale:</b> {locale}</p>
         <p><b>Preview:</b> {preview ? "true" : "false"}</p>
       </div>
