@@ -23,8 +23,7 @@ export async function GET(request: Request) {
   }
 
   if (entityId && entityType) {
-    const query = new URLSearchParams({ entityType });
-    redirect(`/${locale}/${entityId}?${query.toString()}`);
+    redirect(`/fragment/${locale}/${entityId}`);
   }
 
   return new Response("Invalid token", { status: 401 });
