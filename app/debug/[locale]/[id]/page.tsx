@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { draftMode } from "next/headers";
+import { JsonTree } from "@/components/debug/JsonTree";
 import { fetchXdaExperience } from "@/lib/fetch-xda-experience";
 import { fetchXdaFragment } from "@/lib/fetch-xda-fragment";
 import { isFragmentEntityType } from "@/lib/preview-entity";
@@ -45,7 +46,7 @@ export default async function XdaDebugPage({
 
   if (!raw) notFound();
 
-  const json = JSON.stringify(raw, null, 2);
+  const value = JSON.parse(JSON.stringify(raw)) as object;
 
   return (
     <>
@@ -65,7 +66,7 @@ export default async function XdaDebugPage({
           {entityType ? ` · entityType=${entityType}` : null}
         </p>
       </header>
-      <pre className="overflow-auto p-4 whitespace-pre-wrap break-words">{json}</pre>
+      <JsonTree value={value} />
     </>
   );
 }
