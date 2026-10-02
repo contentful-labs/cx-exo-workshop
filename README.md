@@ -38,6 +38,14 @@ Fill in `.env.local`:
   turns on Draft Mode and redirects to `/<locale>/<id>?entityType=<type>` (fragments).
   Fragment rendering on the page is step 4.
 - `/api/draft/disable` — turns off Draft Mode and redirects back.
+- `/debug/[locale]/[id]` — read-only **Preview API** JSON from XDN
+  (`preview.xdn.contentful.com`, `preview=true` query). Not used by the ExO
+  workshop steps. Opened via `enable-debug` from a separate Content Preview
+  platform in Contentful.
+- `/api/draft/enable-debug?secret=<DRAFT_MODE_SECRET>&locale=<locale>&id=<id>` —
+  Draft Mode + redirect to `/debug/<locale>/<id>` (experience).
+- `/api/draft/enable-debug?secret=<DRAFT_MODE_SECRET>&locale=<locale>&entityId=<id>&entityType=<type>` —
+  Draft Mode + redirect to `/debug/<locale>/<id>?entityType=<type>` (fragment).
 
 **Workshop answer keys:** `step-03-end-state` (experience + fragment preview stub on the page),
 `step-04-end-state` (replace stub with `fetchFragment`). Helpers and `draft/enable` match `main`.
@@ -130,6 +138,19 @@ Providing some code snippets for easy copy/paste while going through hand ons tr
 
 **Preview URL**
 `http://localhost:3000/api/draft/enable?secret=this-is-a-secret&locale={locale}&id={experience.sys.id}`
+
+**Preview API debug (separate Content Preview platform — facilitators only)**
+
+Experience (Template entity):
+
+`http://localhost:3000/api/draft/enable-debug?secret=this-is-a-secret&locale={locale}&id={experience.sys.id}`
+
+Fragment (Component entity):
+
+`http://localhost:3000/api/draft/enable-debug?secret=this-is-a-secret&locale={locale}&entityId={fragment.sys.id}&entityType={fragment.sys.type}`
+
+Use the same `DRAFT_MODE_SECRET` as the render preview URLs. Attendees do not
+wire this up; it is pre-built under `app/debug/` and `lib/fetch-xda-*.ts`.
 
 **Experience Fetching**
 ```
