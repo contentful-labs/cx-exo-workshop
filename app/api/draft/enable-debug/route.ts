@@ -19,12 +19,12 @@ export async function GET(request: Request) {
   await fixDraftBypassCookieForIframe();
 
   if (experienceId) {
-    redirect(`/${locale}/${experienceId}`);
+    redirect(`/debug/${locale}/${experienceId}`);
   }
 
   if (entityId && entityType) {
     const query = new URLSearchParams({ entityType });
-    redirect(`/${locale}/${entityId}?${query.toString()}`);
+    redirect(`/debug/${locale}/${entityId}?${query.toString()}`);
   }
 
   return new Response("Invalid token", { status: 401 });
