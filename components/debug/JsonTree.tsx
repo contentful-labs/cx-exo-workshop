@@ -1,7 +1,7 @@
 "use client";
 
 import JsonView from "@uiw/react-json-view";
-import { darkTheme } from "@uiw/react-json-view/dark";
+import { monokaiTheme } from "@uiw/react-json-view/monokai";
 
 type JsonTreeProps = {
   value: object;
@@ -16,7 +16,7 @@ export function JsonTree({ value }: JsonTreeProps) {
       <JsonView
         value={value}
         style={{
-          ...darkTheme,
+          ...monokaiTheme,
           backgroundColor: "transparent",
           fontSize: "15px",
           fontFamily:
