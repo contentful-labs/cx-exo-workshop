@@ -19,7 +19,7 @@ type FragmentOptions = {
  * Workshop utility: the Experiences React SDK exports `fetchExperience` but not
  * `fetchFragment` yet. This mirrors that helper — it calls
  * `experienceFragment.get` on the delivery client, then `resolveExperience`.
- * Used in the fragment preview step; no app wiring until you add step 4.
+ * Used by the pre-wired fragment preview route (`app/fragment/[locale]/[id]`).
  */
 export async function fetchFragment(
   fragmentOptions: FragmentOptions,
