@@ -50,9 +50,9 @@ export default async function XdaDebugPage({
 
   return (
     <>
-      <header className="sticky top-0 z-10 border-b border-neutral-800 bg-neutral-900 px-4 py-2 text-xs text-neutral-400">
+      <header className="sticky top-0 z-10 border-b border-[#3e3d32] bg-[#1e1f1c] px-4 py-2 text-xs text-[#a9aea6]">
         <p>
-          <span className="text-neutral-200">Preview API raw response</span>
+          <span className="text-[#f8f8f2]">Preview API raw response</span>
           {" · "}
           {fragment ? "Experience fragment" : "Experience"}
           {" · "}
