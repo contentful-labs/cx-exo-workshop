@@ -30,15 +30,14 @@ Fill in `.env.local`:
 
 ## Routes
 
-- `/[locale]/[id]` — renders an Experience or Fragment with id `id` in locale
-  `locale`, e.g. `/en-US/homepage`. Pass `?entityType=ExperienceFragment` (or
-  whatever `{fragment.sys.type}` resolves to) after draft enable for fragments.
-  `notFound()` if the entity doesn't exist.
+- `/[locale]/[id]` — **workshop step 3:** you add `experienceConfig`, `fetchExperience`,
+  and `ServerExperienceRenderer` here (starter is debug bar only on `main`).
+- `/fragment/[locale]/[id]` — fetches and renders an Experience Fragment (pre-wired;
+  uses the same `experienceConfig` you complete in step 3).
 - `/api/draft/enable?secret=<DRAFT_MODE_SECRET>&locale=<locale>&id=<id>` —
-  turns on Draft Mode (fetches with the preview token instead of the
-  delivery token) and redirects to `/<locale>/<id>` (experiences).
+  turns on Draft Mode and redirects to `/<locale>/<id>` (experiences).
 - `/api/draft/enable?secret=<DRAFT_MODE_SECRET>&locale=<locale>&entityId=<id>&entityType=<type>` —
-  same for fragments; redirects to `/<locale>/<id>?entityType=<type>`.
+  turns on Draft Mode and redirects to `/fragment/<locale>/<id>` (fragments).
 - `/api/draft/disable` — turns off Draft Mode and redirects back.
 - `/debug/[locale]/[id]` — read-only **Preview API** JSON from XDN
   (`preview.xdn.contentful.com`, `preview=true` query). Not used by the ExO
@@ -48,6 +47,10 @@ Fill in `.env.local`:
   Draft Mode + redirect to `/debug/<locale>/<id>` (experience).
 - `/api/draft/enable-debug?secret=<DRAFT_MODE_SECRET>&locale=<locale>&entityId=<id>&entityType=<type>` —
   Draft Mode + redirect to `/debug/<locale>/<id>?entityType=<type>` (fragment).
+
+**Workshop:** `main` = experience page starter + pre-wired fragment route. `step-03-end-state`
+= answer key for step 3 (`experience-config` + experience page). Fragment preview is
+not a live-coding step — it stays on `/fragment/[locale]/[id]` on every branch.
 
 ## Design tokens: `globals.css` → `design-tokens.ts` → components
 
@@ -108,7 +111,7 @@ the existing helpers (or a new one, colocated in `design-tokens.ts`).
   };
   ```
 
-- **`app/[locale]/[id]/page.tsx`** is the whole render path for a page:
+- **`app/[locale]/[id]/page.tsx`** is where you implement the experience render path in step 3:
   1. `fetchExperience({ spaceId, environmentId, experienceId, locale }, { accessToken, previewToken, preview }, { config: experienceConfig, debug: preview })`
      — fetches the Experience by id/locale from Contentful (CDA, or CPA
      when Draft Mode is on), returning `null` if it doesn't exist.
