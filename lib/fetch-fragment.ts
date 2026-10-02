@@ -16,8 +16,10 @@ type FragmentOptions = {
 };
 
 /**
- * Mirrors `fetchExperience` until the client package exports `fetchFragment`.
- * Fetches an experience fragment from XDA and resolves it to a render plan.
+ * Workshop utility: the Experiences React SDK exports `fetchExperience` but not
+ * `fetchFragment` yet. This mirrors that helper — it calls
+ * `experienceFragment.get` on the delivery client, then `resolveExperience`.
+ * Used by the pre-wired fragment preview route (`app/fragment/[locale]/[id]`).
  */
 export async function fetchFragment(
   fragmentOptions: FragmentOptions,

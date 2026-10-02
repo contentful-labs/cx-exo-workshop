@@ -1,17 +1,13 @@
 import type { Config } from "@contentful/experiences-react";
-import { Button } from "@/components/primitives/Button";
-import { Flex } from "@/components/primitives/Flex";
-import { Image } from "@/components/primitives/Image";
-import { Text } from "@/components/primitives/Text";
 import { resolveDesignToken } from "@/lib/design-tokens";
 
-/** Used for fragment preview rendering; extend during the experience workshop steps. */
+/**
+ * Workshop step 3: register `Button`, `Text`, `Flex`, and `Image` in
+ * `components` (see README cheatsheet). Used by the pre-wired fragment preview
+ * route and by `fetchExperience` / `ServerExperienceRenderer` on the experience
+ * page once you add them in step 3.
+ */
 export const experienceConfig: Config = {
-  components: {
-    Button,
-    Text,
-    Flex,
-    Image,
-  },
+  components: {},
   resolveToken: resolveDesignToken,
 };
