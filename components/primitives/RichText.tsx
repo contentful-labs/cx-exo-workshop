@@ -29,6 +29,18 @@ const renderNode = {
   [BLOCKS.HEADING_6]: (_node: unknown, children: ReactNode) => (
     <h6 style={{ ...headingStyle, fontSize: "0.9em" }}>{children}</h6>
   ),
+  [BLOCKS.QUOTE]: (_node: unknown, children: ReactNode) => (
+    <blockquote
+      style={{
+        margin: "0.75em 0",
+        paddingLeft: "1em",
+        borderLeft: "3px solid currentColor",
+        opacity: 0.9,
+      }}
+    >
+      {children}
+    </blockquote>
+  ),
 };
 
 const renderMark = {
