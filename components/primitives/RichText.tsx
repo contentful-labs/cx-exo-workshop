@@ -3,6 +3,7 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import type { Document } from "@contentful/rich-text-types";
 import { BLOCKS, MARKS } from "@contentful/rich-text-types";
 import { resolveColor, textSize } from "@/lib/design-tokens";
+import { normalizeRichTextDocument } from "@/lib/normalize-rich-text-document";
 
 const headingStyle = {
   margin: "0.75em 0 0.35em",
@@ -67,11 +68,12 @@ export function RichText({
   size,
   color,
 }: {
-  document?: Document | null;
+  document?: Document | string | Record<string, unknown> | null;
   size?: string;
   color?: string;
 }) {
-  if (!document) return null;
+  const richText = normalizeRichTextDocument(document);
+  if (!richText) return null;
 
   return (
     <div
@@ -81,7 +83,7 @@ export function RichText({
         lineHeight: 1.6,
       }}
     >
-      {documentToReactComponents(document, { renderMark, renderNode })}
+      {documentToReactComponents(richText, { renderMark, renderNode })}
     </div>
   );
 }
