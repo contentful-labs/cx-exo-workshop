@@ -2,6 +2,7 @@ import type { Config } from "@contentful/experiences-react";
 import { Button } from "@/components/primitives/Button";
 import { Flex } from "@/components/primitives/Flex";
 import { Image } from "@/components/primitives/Image";
+import { RichText } from "@/components/primitives/RichText";
 import { Text } from "@/components/primitives/Text";
 import { resolveDesignToken } from "@/lib/design-tokens";
 
@@ -18,6 +19,7 @@ export const experienceConfig: Config = {
     Text,
     Flex,
     Image,
+    RichText,
   },
   resolveToken: resolveDesignToken,
 };
