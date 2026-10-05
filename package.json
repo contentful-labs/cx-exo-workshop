@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@contentful/experiences-react": "^0.7.7",
+    "@contentful/rich-text-react-renderer": "^16.2.2",
+    "@contentful/rich-text-types": "^17.2.7",
     "@uiw/react-json-view": "^2.0.0-alpha.43",
     "next": "16.2.6",
     "react": "19.2.4",
