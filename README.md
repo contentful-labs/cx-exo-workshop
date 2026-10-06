@@ -1,4 +1,4 @@
-# cx-simple-exo
+# cx-exo-workshop
 
 A minimal Next.js app demonstrating [`@contentful/experiences-react`](https://github.com/contentful/experiences)
 rendering a Contentful Experience, styled by a tiny hand-rolled design system
