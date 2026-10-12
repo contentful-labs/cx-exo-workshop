@@ -40,7 +40,7 @@ Fill in `.env.local`:
   turns on Draft Mode and redirects to `/fragment/<locale>/<id>` (fragments).
 - `/api/draft/disable` — turns off Draft Mode and redirects back.
 - `/debug/[locale]/[id]` — read-only **Preview API** JSON from XDN
-  (`preview.xdn.contentful.com`, `preview=true` query). Not used by the ExO
+  (`preview.xdn.contentful.com` + CPA token; no `preview` query param). Not used by the ExO
   workshop steps. Opened via `enable-debug` from a separate Content Preview
   platform in Contentful.
 - `/api/draft/enable-debug?secret=<DRAFT_MODE_SECRET>&locale=<locale>&id=<id>` —

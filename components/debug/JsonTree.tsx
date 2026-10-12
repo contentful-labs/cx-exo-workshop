@@ -22,7 +22,8 @@ export function JsonTree({ value }: JsonTreeProps) {
           fontFamily:
             'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
         }}
-        collapsed={2}
+        collapsed={false}
+        shortenTextAfterLength={0}
         displayObjectSize
         displayDataTypes={false}
         enableClipboard
