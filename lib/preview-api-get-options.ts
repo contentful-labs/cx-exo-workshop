@@ -1,13 +1,13 @@
 /**
- * Query params for Experience Delivery preview mode (preview.xdn.contentful.com
- * + CPA token). See @contentful/experience-delivery README → Preview client.
+ * Query params for XDN experience/fragment GET requests.
+ *
+ * Preview mode is selected by the client (CPA token + preview host), not a
+ * `preview` query parameter — the delivery API validates runtime params against
+ * the experience contract and rejects unknown keys such as `preview`.
  */
 export function previewApiGetOptions(
   locale: string | undefined,
-  usePreviewApi: boolean,
+  _usePreviewApi: boolean,
 ) {
-  if (!usePreviewApi) {
-    return { locale };
-  }
-  return { locale, preview: "true" };
+  return { locale };
 }
