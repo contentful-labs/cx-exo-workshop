@@ -17,7 +17,7 @@ export default async function XdaDebugPage({
   const { isEnabled: draftModeEnabled } = await draftMode();
   const fragment = isFragmentEntityType(entityType);
 
-  // Debug preview always hits the XDN Preview API (CPA + preview host + preview=true).
+  // Debug preview always hits the XDN Preview API (CPA token + preview host).
   const clientOptions = {
     accessToken: process.env.CDA_TOKEN!,
     previewToken: process.env.CPA_TOKEN,
