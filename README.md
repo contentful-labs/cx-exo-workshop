@@ -123,6 +123,37 @@ the existing helpers (or a new one, colocated in `design-tokens.ts`).
   once in `experience-config.ts` / `design-tokens.ts` is enough for it to
   show up correctly in both preview and published rendering.
 
+## Adaptive experience rendering (optional)
+
+Workshop branches use **`ServerExperienceRenderer`** for both published and
+Draft Mode preview (see the cheatsheet below). That matches the training steps
+and keeps everything on the server.
+
+If Draft Mode preview in the Contentful iframe fails with a cryptic client
+error such as **`frame.join is not a function`**, the usual cause is the
+combination of **`debug={preview}`** and resolve-time **`diagnostics`** on the
+render plan. The SDK stores those diagnostics as plain **`Error`** instances;
+they are not safe to pass across the React Server Components boundary when the
+renderer also enables the debug panel.
+
+The optional branch **`adaptive-preview-renderer`** adds a small wrapper,
+**`AdaptiveExperienceRenderer`**, that chooses the renderer from Draft Mode:
+
+| Mode | Renderer | Why |
+| --- | --- | --- |
+| Published (`preview === false`) | `ServerExperienceRenderer` | Full SSR; same as the workshop answer key. |
+| Draft preview (`preview === true`) | `ExperienceView` (`ClientExperienceRenderer` + `experienceConfig` on the client) | Debug output and component registry stay on the client; the plan is passed through **`planForClient()`** (`lib/plan-for-client.ts`), which clears non-serializable `diagnostics` before the boundary. |
+
+Usage on that branch (experience and fragment pages):
+
+```tsx
+<AdaptiveExperienceRenderer experience={experience} preview={preview} />
+```
+
+`fetchExperience` / `experienceConfig` are unchanged — only the render step
+splits server vs client. Checkout `adaptive-preview-renderer` to try it;
+stay on `final-state` / `step-*` for the default workshop flow.
+
 ## Header, footer, and layout
 
 Not the main focus of this repo — included to show how an Experience can sit
