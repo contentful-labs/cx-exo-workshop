@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import type { Document } from "@contentful/rich-text-types";
-import { BLOCKS, MARKS } from "@contentful/rich-text-types";
+import type { Block, Document, Inline } from "@contentful/rich-text-types";
+import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
 import { resolveColor, textSize } from "@/lib/design-tokens";
 import { normalizeRichTextDocument } from "@/lib/normalize-rich-text-document";
 
@@ -10,6 +10,46 @@ const headingStyle = {
   fontWeight: 600,
   lineHeight: 1.25,
 } as const;
+
+const embeddedPlaceholderBlockStyle = {
+  margin: "0.75em 0",
+  padding: "0.5em 0.75em",
+  border: "1px dashed currentColor",
+  borderRadius: "4px",
+  fontSize: "0.875em",
+  opacity: 0.85,
+} as const;
+
+const embeddedPlaceholderInlineStyle = {
+  padding: "0.1em 0.35em",
+  border: "1px dashed currentColor",
+  borderRadius: "3px",
+  fontSize: "0.875em",
+  opacity: 0.85,
+} as const;
+
+function entryIdFromEmbeddedTarget(target: unknown): string | null {
+  if (typeof target !== "object" || target === null) return null;
+  const id = (target as { sys?: { id?: unknown } }).sys?.id;
+  return typeof id === "string" && id.length > 0 ? id : null;
+}
+
+function embeddedEntryPlaceholder(node: Block | Inline, block: boolean) {
+  const id = entryIdFromEmbeddedTarget(node.data?.target);
+  const label = id ?? "unknown entry id";
+  if (block) {
+    return (
+      <div role="note" style={embeddedPlaceholderBlockStyle}>
+        Embedded entry: <code>{label}</code>
+      </div>
+    );
+  }
+  return (
+    <span role="note" style={embeddedPlaceholderInlineStyle}>
+      Embedded entry: <code>{label}</code>
+    </span>
+  );
+}
 
 const renderNode = {
   [BLOCKS.HEADING_1]: (_node: unknown, children: ReactNode) => (
@@ -42,6 +82,10 @@ const renderNode = {
       {children}
     </blockquote>
   ),
+  [BLOCKS.EMBEDDED_ENTRY]: (node: Block | Inline) =>
+    embeddedEntryPlaceholder(node, true),
+  [INLINES.EMBEDDED_ENTRY]: (node: Block | Inline) =>
+    embeddedEntryPlaceholder(node, false),
 };
 
 const renderMark = {
