@@ -17,6 +17,8 @@ export function Image({
   maxWidth?: string;
   maxHeight?: string;
 }) {
+  if (!src) return null;
+
   // eslint-disable-next-line @next/next/no-img-element
   return (
     <img

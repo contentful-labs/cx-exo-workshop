@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import { draftMode } from "next/headers";
-import { ServerExperienceRenderer } from "@contentful/experiences-react";
 import { experienceConfig } from "@/lib/experience-config";
 import { fetchFragment } from "@/lib/fetch-fragment";
+import { AdaptiveExperienceRenderer } from "@/components/experience/AdaptiveExperienceRenderer";
 
 /**
  * Component (fragment) Content Preview — pre-wired for the workshop.
@@ -41,11 +41,7 @@ export default async function FragmentPreviewPage({
         <p><b>Locale:</b> {locale}</p>
         <p><b>Preview:</b> {preview ? "true" : "false"}</p>
       </div>
-      <ServerExperienceRenderer
-        experience={plan}
-        config={experienceConfig}
-        debug={preview}
-      />
+      <AdaptiveExperienceRenderer experience={plan} preview={preview} />
     </>
   );
 }

@@ -115,9 +115,9 @@ the existing helpers (or a new one, colocated in `design-tokens.ts`).
   1. `fetchExperience({ spaceId, environmentId, experienceId, locale }, { accessToken, previewToken, preview }, { config: experienceConfig, debug: preview })`
      — fetches the Experience by id/locale from Contentful (CDA, or CPA
      when Draft Mode is on), returning `null` if it doesn't exist.
-  2. `<ServerExperienceRenderer experience={experience} config={experienceConfig} debug={preview} />`
-     — renders it server-side using the same `experienceConfig`, resolving
-     design tokens and mapping each node to its registered component.
+  2. `<AdaptiveExperienceRenderer experience={experience} preview={preview} />`
+     — `ServerExperienceRenderer` when published; `ExperienceView` (client) in
+     Draft Mode so preview/debug stay RSC-safe (see `lib/plan-for-client.ts`).
 
   Both calls take the same `config`, so registering a component or a token
   once in `experience-config.ts` / `design-tokens.ts` is enough for it to
@@ -178,7 +178,7 @@ const experience = await fetchExperience(
 ```
 
 **Experience Rendering**
-`<ServerExperienceRenderer experience={experience} config={experienceConfig} debug={preview} />`
+`<AdaptiveExperienceRenderer experience={experience} preview={preview} />`
 
 **Experience Config**
 ```
